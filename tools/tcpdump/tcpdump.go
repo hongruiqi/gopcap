@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/dustin/gopcap"
+	"github.com/hongruiqi/gopcap"
 )
 
 const (
@@ -45,7 +45,7 @@ func main() {
 
 	if *device == "" {
 		devs, err := pcap.Findalldevs()
-		if err != "" {
+		if err != nil {
 			fmt.Fprintf(errout, "tcpdump: couldn't find any devices: %s\n", err)
 		}
 		if 0 == len(devs) {
@@ -63,7 +63,7 @@ func main() {
 
 	if expr != "" {
 		ferr := h.Setfilter(expr)
-		if ferr != "" {
+		if ferr != nil {
 			fmt.Fprintf(out, "tcpdump: %s\n", ferr)
 			out.Flush()
 		}
